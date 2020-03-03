@@ -210,6 +210,7 @@ export default {
         refs[formName].validate((valid) => {
           if (valid) {
           model.value === 'login' ? login():register()
+          // console.log(valid);
         } else {
             console.log('error submit!!');
             return false;
@@ -228,6 +229,9 @@ export default {
         Login(requestData).then(response =>{
           console.log('登录');
           console.log(response);
+          root.$router.push({
+          name: "Console"
+          })
         }).catch(error =>{
 
         })
