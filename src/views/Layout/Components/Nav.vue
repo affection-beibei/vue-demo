@@ -1,9 +1,8 @@
 <template>
   <div id="nav-warp">
+    <h1 class="logo"><img src="../../../assets/Alogo.jpg" alt=""></h1>
     <el-menu
       default-active="1-4-1"
-      @open="handleOpen"
-      @close="handleClose"
       :collapse="isCollapse"
       background-color="transparent"
       text-color="#fff"
@@ -29,28 +28,19 @@
   </div>
 </template>
 <script>
-import { reactive, ref, isRef, toRefs, onMounted } from "@vue/composition-api";
+import { reactive, ref, isRef, toRefs, onMounted, computed } from "@vue/composition-api";
 export default {
   name: "navMenu",
   setup(props, { root }) {
-    //data数组
-    const isCollapse = ref(false);
+    //data數據
     const routers = reactive(root.$router.options.routes);
     /**
-     * 函数
+     * computed監聽
      */
-
-    const handleOpen = (key, keyPath) => {
-      // console.log(key, keyPath);
-    };
-    const handleClose = (key, keyPath) => {
-      console.log(key, keyPath);
-    };
+    const isCollapse =computed(()=> root.$store.state.isCollapse)
     return {
       isCollapse,
       routers,
-      handleOpen,
-      handleClose
     };
   }
 };
@@ -61,12 +51,31 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  width: $navMenu;
   height: 100vh;
   background-color: #40576c;
+  transition: all .3s ease 0s;
   svg{
     font-size: 20px;
     margin-right: 10px;
+  }
+}
+.logo{
+ text-align: center;
+ img{
+   margin: 28px auto 25px;
+   width: 100px;
+   cursor: pointer;
+  transition: all .3s ease 0s;
+ }
+}
+.open{
+  #nav-warp{
+    width: $navMenu;
+  }
+}
+.close{
+   #nav-warp{width: 64px;}
+  .logo img{width: 90%;
   }
 }
 </style>

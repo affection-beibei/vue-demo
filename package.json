@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@vue/composition-api": "^0.4.0",
+    "cookie_js": "^1.4.0",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
     "js-sha1": "^0.6.0",
+    "save": "^2.4.0",
     "svg-sprite-loader": "^4.2.1",
     "vue": "^2.6.11",
     "vue-loader": "^15.9.0",
