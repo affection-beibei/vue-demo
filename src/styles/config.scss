@@ -6,3 +6,15 @@ $navMenuMin: 64px;
 $layoutHeader: 75px;
 //主顏色
 $mainColor:#f56c6c;
+
+@mixin labelDom($align,$width,$line-height:"normal") {
+    label {
+        float: left;
+        width: $width + px;
+        text-align: $align;
+        line-height: $line-height + px;
+      }
+      .content-warp {
+        margin-left: $width +px;
+      }
+}

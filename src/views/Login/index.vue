@@ -18,7 +18,7 @@
 
         <el-form-item prop="pass" class="item-from">
           <label for="pass">密码</label>
-          <el-input id="pass" type="text" v-model="ruleForm.pass" autocomplete="off" minlength="6" maxlength="20"
+          <el-input id="pass" type="password" v-model="ruleForm.pass" autocomplete="off" minlength="6" maxlength="20"
           ></el-input>
         </el-form-item>
 
@@ -226,15 +226,12 @@ export default {
               password:sha1(ruleForm.pass),
               code:ruleForm.verification,
             }
-        Login(requestData).then(response =>{
-          console.log('登录');
-          console.log(response);
-          root.$router.push({
-          name: "Console"
-          })
-        }).catch(error =>{
-
-        })
+            root.$store.dispatch('login',requestData).then(response =>{
+              root.$router.push({
+              name: "Console"
+              })
+              
+            }).catch(error =>{})
      })
      /**
       * 注册  
