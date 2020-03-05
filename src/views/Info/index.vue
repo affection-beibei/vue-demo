@@ -164,6 +164,9 @@ export default {
         content:"是否删除所有信息"
       });
     };
+    const confirmDell =()=>{
+      
+    }
     return {
       deleAll,
       btn_dele,
