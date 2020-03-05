@@ -56,27 +56,49 @@
         <el-button type="danger" style="width:100%">搜索</el-button>
       </el-col>
       <el-col :span="5">
-        <el-button class="pull-right" type="danger" style="width:40%">新增</el-button>
+        <el-button class="pull-right" type="danger" style="width:40%" @click="dialog_info = true">新增</el-button>
       </el-col>
     </el-row>
     <!-- 表格数据 -->
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="title" label="标题" width="830"></el-table-column>
+    <el-table class="tabel-el" :data="tableData" border style="width: 100%">
+      <el-table-column type="selection" width="55"></el-table-column>
+      <el-table-column prop="title" label="标题" width="800"></el-table-column>
       <el-table-column prop="category" label="类别" width="130"></el-table-column>
       <el-table-column prop="date" label="日期" width="235"></el-table-column>
-      <el-table-column prop="user" label="管理人" width="115" ></el-table-column>
-      <el-table-column label="操作" >
-          <el-button type="danger" >删除</el-button>
-          <el-button type="success" >编辑</el-button>
+      <el-table-column prop="user" label="管理人" width="100"></el-table-column>
+      <el-table-column label="操作">
+        <el-button type="danger" size="mini" @click="btn_dele">删除</el-button>
+        <el-button type="success" size="mini" @click="dialog_info = true">编辑</el-button>
       </el-table-column>
     </el-table>
+    <el-col class="btn-page">
+      <el-col :span="12">
+        <el-button plain type="small" @click="deleAll">批量删除</el-button>
+      </el-col>
+      <el-col :span="12">
+        <el-pagination
+          class="pull-right"
+          background
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          layout="total,sizes,prev, pager, next,jumper"
+          :total="60"
+          :page-sizes="[10, 20, 30, 40]"
+        ></el-pagination>
+      </el-col>
+    </el-col>
+    <!-- 新增弹窗功能实现-->
+    <Infopopu :flag.sync="dialog_info"></Infopopu>
   </div>
 </template>
 <script>
+import Infopopu from "./informage/infopo";
 import { ref, reactive } from "@vue/composition-api";
 export default {
   name: "infoIndex",
-  setup(props) {
+  components: { Infopopu },
+  setup(props, { root }) {
+    const dialog_info = ref(false);
     const options = reactive([
       {
         value: "1",
@@ -110,7 +132,8 @@ export default {
         user: "管理员"
       },
       {
-        title: "习近平在中央政协工作会议暨庆祝中国人民政治协商会议成立70周年大会上发表重要讲话",
+        title:
+          "习近平在中央政协工作会议暨庆祝中国人民政治协商会议成立70周年大会上发表重要讲话",
         category: "国内信息",
         date: "2019-09-10 19:31:31",
         user: "管理员"
@@ -128,20 +151,39 @@ export default {
         user: "管理员"
       }
     ]);
+    // 写入方法
+    const handleSizeChange = val => {};
+    const handleCurrentChange = val => {};
+    const btn_dele = () => {
+      root.confirm({
+        content:"是否删除当前信息"
+      });
+    };
+    const deleAll = () => {
+      root.confirm({
+        content:"是否删除所有信息"
+      });
+    };
     return {
+      deleAll,
+      btn_dele,
+      dialog_info,
+      handleSizeChange,
+      handleCurrentChange,
+      tableData,
       options,
+      searchOption,
       value,
       value2,
-      searchOption,
-      serach_keywork,
       search_key,
-      tableData
+      serach_keywork
     };
   }
 };
 </script>
 <style lang="scss" scoped>
 @import "../../styles/config.scss";
+// @import "../../styles/elementui.scss";
 .warp-lable {
   &.category {
     @include labelDom(left, 60, 40);
@@ -153,16 +195,10 @@ export default {
     @include labelDom(right, 100, 40);
   }
 }
-div.el-table{
-   td,th{
-        text-align: center;
-    }
-    th{
-        font-weight: bold;
-        color: #344a5f;
-    }
-    td{
-        font-size: 14px;
-    }
+.tabel-el {
+  margin-top: 8px;
+}
+.btn-page {
+  margin-top: 36px;
 }
 </style>

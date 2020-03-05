@@ -17,3 +17,7 @@ li.el-submenu{
         .el-menu-item:hover{ background-color: $mainColor !important;}
  }
 //  定义table样式
+div.el-table td, 
+div.el-table th {
+    text-align: center;
+}
