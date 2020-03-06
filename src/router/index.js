@@ -68,6 +68,14 @@ export default  new Router({
             name:'信息分类',
           },
           component: () => import('../views/Info/cateSort.vue')
+        },
+        {
+          path: "/insertinfo",
+          name: "Insertinfo",
+          meta:{
+            name:'发表信息',
+          },
+          component: () => import('../views/Info/insertinfo.vue')
         }
       ]
     },

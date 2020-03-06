@@ -1,16 +1,28 @@
-import cookie from "cookie_js"
-const admintoKen = "admin_token";
+import cookie from "cookie_js";
 
-export function getToken(){
-    return cookie.get(admintoKen)
+const adminToKen = "admin_toKen";
+const usernameKey = "username";
+
+export function getToKen(){
+    return cookie.get(adminToKen);
 }
 
-export function setToken(token){
-    return cookie.set(admintoKen,token)
+export function setToKen(toKen){
+    return cookie.set(adminToKen, toKen);
 }
-export function removeToken(token){
-    return cookie.remove(admintoKen)
+
+export function removeToKen(toKen){
+    return cookie.remove(adminToKen);
 }
+
 export function setUserName(value){
-    return  cookie.set(admintoKen,token)
+    return cookie.set(usernameKey, value);
+}
+
+export function getUserName(){
+    return cookie.get(usernameKey);
+}
+
+export function removeUserName(){
+    return cookie.remove(usernameKey);
 }
